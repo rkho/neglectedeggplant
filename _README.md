@@ -1,10 +1,10 @@
 # Wayfare
 
-Wayfare alerts spontaneous travellers to great airfares. Users enter their origin, destination and buget - as soon as a flight is available, Wayfare alerts the user.
+Wayfare alerts spontaneous travellers to great airfares. Users enter their origin, destination and budget - as soon as a flight is available, Wayfare alerts the user.
 
 ## Team
 
-  - __Product Owner__: Rebecca Kwon
+  - __Product Owner__: Rebekah Kwon
   - __Scrum Master__: Garron Sanchez
   - __Development Team Members__: Richard Kho, Scott Dixon
 
@@ -25,6 +25,7 @@ Wayfare alerts spontaneous travellers to great airfares. Users enter their origi
 ## Requirements
 
 - Node 0.10.x
+- Express 4.12.x
 - Sequelize 2.0.x
 - Sendgrid 1.6.x
 - Angular 1.3.x
