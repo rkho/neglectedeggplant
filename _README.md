@@ -1,12 +1,12 @@
-# Project Name
+# Wayfare
 
-> Pithy project description
+Wayfare alerts spontaneous travellers to great airfares. Users enter their origin, destination and budget - as soon as a flight is available, Wayfare alerts the user.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Rebekah Kwon
+  - __Scrum Master__: Garron Sanchez
+  - __Development Team Members__: Richard Kho, Scott Dixon
 
 ## Table of Contents
 
@@ -25,10 +25,11 @@
 ## Requirements
 
 - Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Express 4.12.x
+- Sequelize 2.0.x
+- Sendgrid 1.6.x
+- Angular 1.3.x
+- Bootstrap 3.3.x
 
 ## Development
 
