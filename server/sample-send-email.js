@@ -1,7 +1,7 @@
 var triggerEmail = require('./components/emails/trigger-email.js');
 
 triggerEmail(
-  "hello@richardkho.com",
+  "johndoe@gmail.com",
   {
     origin: "Los Angeles",
     destination: "San Diego",
