@@ -1,4 +1,4 @@
-# Project Name #
+# Wayfare #
 
 <!--
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -16,29 +16,19 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
 
-## Heading ##
-  > Wayfare
+## Name a price and save on airfare. ##
 
-## Sub-Heading ##
-  > Name a price and save on airfare.
+#### Provide your own airfare destination and price. When we find a match we'll contact you so that you can book a flight at a good deal. ####
 
-## Summary ##
-  > Provide your own airfare destination and price. When we find a match we'll contact you so that you can book a flight at a good deal.
 
-## Problem ##
-  > Tracking fluctuating airfare prices can be a hassel and time consuming, especially when you're looking for a good deal on cheap airfare. Let us do all the work. We'll let you know when a flight matches your price so you know when to book.
+Tracking fluctuating airfare prices can be a hassel and time consuming, especially when you're looking for a good deal on cheap airfare. Let us do all the work. We'll let you know when a flight matches your price so you know when to book.
 
-## Solution ##
-  > We keep track of flight prices for you and contact you when we find a match.
+#### We keep track of flight prices for you and contact you when we find a match. ####
 
-## Quote from You ##
-  > "We cut out the noise in booking airfare on a budget. One signal to a great flight deals." -Eggplant
+  > "We cut out the noise in booking airfare on a budget. One signal to a great flight deal." -Eggplant
 
-## How to Get Started ##
-  > Three easy steps to cheap airfare. Enter a destination, name a price, and subscribe!
+#### Three easy steps to cheap airfare. Enter a destination, name a price, and subscribe! ####
 
-## Customer Quote ##
   > "Best way to find a good deal, ever." –Bon Air
 
-## Closing and Call to Action ##
-  > Visit us at wayfareair.com.
+### Visit us at wayfareair.com. ###
