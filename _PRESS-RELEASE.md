@@ -32,7 +32,7 @@ Once the project moves into development, the press release can be used as a touc
   > We keep track of flight prices for you and contact you when we find a match.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "We cut out the noise in booking airfare on a budget. One signal to a great flight deals." -Eggplant
 
 ## How to Get Started ##
   > Three easy steps to cheap airfare. Enter a destination, name a price, and subscribe!
