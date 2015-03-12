@@ -4,7 +4,8 @@
     <h1>Where would you like to go?</h1>
     <div ui-view></div>
 
-    <input type="text" class="form-control text-center" placeholder="LAX">
+    <input type="text" ng-model="asyncSelected" placeholder="Type in a city or airport code" typeahead="address for address in getLocation($viewValue)" class="form-control text-center">
+    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
 
     <a href="#" class="smooth-scroll btn btn-danger btn-next">NEXT</a>
     </div>
