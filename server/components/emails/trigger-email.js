@@ -22,7 +22,8 @@ triggerEmail(
     destination: "San Diego",
     price: 123.45,
     carrier: "Virgin America",
-    departure: "01/23/16 at 3PM"
+    departure: "01/23/16 at 3PM",
+    proceedUrl: "http://virginamerica.com"
   },
   {
     success: function(){
