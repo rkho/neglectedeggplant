@@ -5,7 +5,7 @@
 'use strict';
 
 var errors = require('./components/errors');
- require reqeust
+var request = require('request') // The express method for requesting data from an API
 module.exports = function(app) {
 
   // Insert routes below
@@ -30,7 +30,7 @@ module.exports = function(app) {
   //   outbounddate: '',
   // };
 
-
+  //  TODO: change '/postToAPIForFlightData' to the actual URL for our site
   app.post('/postToAPIForFLightData', function(req, res) {
   
   // POST to Google's QPX API
@@ -44,20 +44,20 @@ module.exports = function(app) {
       'request': {
         'slice': [
           {
-            'origin': req.body.origin, // 'SFO'
+            'origin': req.body.origin, // Ex: 'SFO'
             'destination': req.body.destination, // 'LAX' 
             'date': req.body.date // '2015-06-01'
           }
         ],
         'passengers': {
           'adultCount': 1, // Will always be one
-          'infantInLapCount': 0, // Default other options to 0
+          'infantInLapCount': 0, // Default other passenger options to 0 for MVP
           'infantInSeatCount': 0,
           'childCount': 0,
           'seniorCount': 0
         },
-        'solutions': 5, // We really only need 1 solution
-        'maxPrice': 'USD100.00', // 'USD100.00'
+        'solutions': 5, // We really only need 1 solution for MVP
+        'maxPrice': req.body.maxPrice, // 'USD100.00'
         'refundable': false // Default to false
       } 
     };
@@ -70,7 +70,7 @@ module.exports = function(app) {
 
       // For now just log out the successful res.body
       console.log(body);
-      // TODO: add logic to send an email when a successfull response occurs
+      // TODO: add logic to send an email when a successful response occurs
       // add code here
     });
    
