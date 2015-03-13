@@ -85,11 +85,11 @@ module.exports = function(app) {
       // var budget = user.budget;
 
       //if (saleTotal === budget) {
-        var user = /*...*/;
-        user.sent = true;
-        user.save().then(function() {
-          //send email
-        });
+        // var user = /*...*/;
+        // user.sent = true;
+        // user.save().then(function() {
+        //   //send email
+        // });
       // }
     });
 
