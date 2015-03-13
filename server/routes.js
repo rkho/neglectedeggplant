@@ -92,7 +92,6 @@ module.exports = function(app) {
       // }
     });
 
-
    // POST to Sky Scanner API
    // request.post(SkyScannerSessionOptions, function(err, res, body) {
    //  console.log(body)
