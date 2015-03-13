@@ -244,7 +244,7 @@ var airlineCarrier = response.trips.data.carrier[0].name; //"Virgin America Inc.
 var flightCarrierCode = response.trips.tripOption[0].slice[0].segment[0].flight.carrier; //"VX"
 var flightNumber = response.trips.tripOption[0].slice[0].segment[0].flight.number; //"922"
 var cabin = response.trips.tripOption[0].slice[0].segment[0].cabin; //"COACH"
-var aircraft = response.trips.data.aircraft[0].name; //"Virgin America Inc.
+var aircraft = response.trips.data.aircraft[0].name; //"Airbus A320"
 console.log(airlineCarrier, flightCarrierCode, flightNumber, cabin, aircraft);
 
 // PRICING
