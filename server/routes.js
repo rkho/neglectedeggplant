@@ -3,7 +3,7 @@
  */
 
 'use strict';
-
+var User = require('./db/schema.js');
 var errors = require('./components/errors');
 var request = require('request') // The express method for requesting data from an API
 module.exports = function(app) {
@@ -31,8 +31,14 @@ module.exports = function(app) {
   // };
 
   //  TODO: change '/postToAPIForFlightData' to the actual URL for our site
-  app.post('/postToAPIForFLightData', function(req, res) {
+  app.get('/getflights', function(req, res) {
   
+    User.findAll().then(function(user) {
+      console.log(user);
+    }).then(function(){
+      res.send(200)      
+    })
+
   // POST to Google's QPX API
   // Google QPX options requires only the standard options object
     var key = 'key=' + ourAPIkey;
@@ -65,7 +71,7 @@ module.exports = function(app) {
     //  Sends the request to QPX
     request.post(QPXOptions, function(err, res, body) {
       if(err) {
-        console.error(err)
+        console.error(err);
       }
 
       // For now just log out the successful res.body
