@@ -26,6 +26,10 @@ angular
         templateUrl: 'app/views/location.html',
         controller: 'MainCtrl'
       })
+      .when('/budget', {
+        templateUrl: 'app/views/budget.html',
+        controller: 'MainCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -6,35 +6,34 @@
  * @description
  * # MainCtrl
  * Controller of the testangularApp
+ http://maps.googleapis.com/maps/api/geocode/json
  */
 angular.module('wayfareApp')
   .controller('MainCtrl', function ($scope, $http, myFactory) {
-    $scope.getLocation = function(val) {
-      return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
+    $scope.getLocation = function(name) {
+      return $http.get('/getAirportData', {
         params: {
-          address: val,
-          sensor: false
+          name: name,
         }
       }).then(function(response){
+        console.log('hello');
         return response.data.results.map(function(item){
-          return item.formatted_address;
+          return item.name;
         });
       });
     };
     $scope.submit = function(key, value){
-      return myFactory.sendData(key, value);
+      myFactory.sendData(key, value);
     };
+    $scope.getDestination = myFactory.destination;
+    $scope.getHome = myFactory.home;
+    $scope.budget = myFactory.budget;
   })
   .factory('myFactory', function(){
     var service = {};
-    service.destination = '';
-    service.location = '';
-    service.email = '';
-    service.budget = 0;
-    service.sendData = function(value){
-      this.details[destination] = value;
-      console.log(this.details);
+    service.sendData = function(key, value){
+      this[key] = value;
+      console.log(this);
     }
     return service;
-    return details;
   })

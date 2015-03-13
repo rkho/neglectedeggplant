@@ -1,0 +1,13 @@
+<div class="text-center">
+  <form class="container">
+    <div class="col-sm-12">
+    <h1>{{ getDestination }}, huh? Where are you coming from?</h1>
+    <div ui-view></div>
+    <form name="airportName">
+    <input type="text" ng-model="asyncLocation" placeholder="Which city are you departing from?" typeahead="address for address in getLocation($viewValue)" class="form-control text-center" ng-required="true">
+
+    <a href="#/budget" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!asyncLocation" ng-click="submit('home', asyncLocation)">NEXT</a>
+    </form>
+    </div>
+  </form>
+</div>
