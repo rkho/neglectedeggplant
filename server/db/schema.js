@@ -1,8 +1,9 @@
-var Sequelize = require('sequelize-sqlite').sequelize;
-var sqlite = require('sequelize-sqlite').sqlite;
-var sequelize = new Sequelize('database', 'username', 'password', {
-  dialiect: 'sqlite',
-  storage:  'file:data.db'
+var Sequelize = require('sequelize');
+
+var sequelize = new Sequelize('', '', '', {
+  host: 'localhost',
+  dialect: 'sqlite',
+  storage: 'db/database.sqlite'
 });
 
 var User = sequelize.define('User', {
@@ -15,19 +16,13 @@ var User = sequelize.define('User', {
   timestamps: true
 });
 
+sequelize.sync().then(function(){
+  // User.create({
+  //   email: 'janedoe',
+  //   origin: 'LAX',
+  //   destination: 'SAN',
+  //   budget: 123.45
+  // });
+});
 
-sequelize
-  .sync()
-  .success(function() {
-    console.log('Synced');
-  });
-
-sequelize
-  .authenticate()
-  .complete(function(err) {
-    if (!!err) {
-      console.log('Unable to connect to the database:', err)
-    } else {
-      console.log('Connection has been established successfully.')
-    }
-  });
+module.exports = User;

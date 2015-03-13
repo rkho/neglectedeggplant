@@ -8,5 +8,7 @@ module.exports = {
     uri: 'mongodb://localhost/neglectedeggplant-dev'
   },
 
+  port: 3000,
+
   seedDB: true
 };
