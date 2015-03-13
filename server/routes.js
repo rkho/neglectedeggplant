@@ -127,7 +127,8 @@ module.exports = function(app) {
 
   app.route('/getAirportData')
     .get(function(req, res){
-      res.sendfile(app.get('appPath') + '/app/airportdata/airports.json');
+      res.send(JSON.stringify([{'name' : 'SFO'}]))
+      // res.send(JSON.stringify(app.get('appPath') + '/app/airportdata/airports.json'));
     })
 
   // All other routes should redirect to the index.html
