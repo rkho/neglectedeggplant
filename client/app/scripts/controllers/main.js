@@ -16,8 +16,8 @@ angular.module('wayfareApp')
           name: name,
         }
       }).then(function(response){
-        console.log('hello');
-        return response.data.results.map(function(item){
+        console.log(response.data);
+        return response.data.map(function(item){
           return item.name;
         });
       });
