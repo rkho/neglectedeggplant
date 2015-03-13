@@ -16,10 +16,10 @@ angular.module('wayfareApp')
           name: name,
         }
       }).then(function(response){
-        console.log(response.data);
-        return response.data.map(function(item){
-          return item.name;
-        });
+        console.log(response);
+        // return response.data.map(function(item){
+          // return item.name;
+        // });
       });
     };
     $scope.submit = function(key, value){

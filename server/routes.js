@@ -6,6 +6,7 @@
 
 var errors = require('./components/errors');
 var request = require('request') // The express method for requesting data from an API
+// var data = require('/client/app/airportdata/airports.json');
 module.exports = function(app) {
 
   // Insert routes below
@@ -100,11 +101,12 @@ module.exports = function(app) {
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
 
-  app.route('/getAirportData')
-    .get(function(req, res){
-      res.send(JSON.stringify([{'name' : 'SFO'}]))
-      // res.send(JSON.stringify(app.get('appPath') + '/app/airportdata/airports.json'));
-    })
+  // app.route('/getAirportData')
+  //   .get(function(req, res){
+
+  //     // res.send(JSON.stringify(data))
+  //     res.send(app.get('appPath') + '/app/airportdata/airports.txt');
+  //   })
 
   // All other routes should redirect to the index.html
   app.route('/*')
