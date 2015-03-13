@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 
 var sequelize = new Sequelize('', '', '', {
   // host: 'localhost',
-  dialect: 'mysql',
+  dialect: 'sqlite',
   storage: 'db/database.sqlite'
 });
 
