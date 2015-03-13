@@ -32,11 +32,11 @@ module.exports = function(app) {
 
   //  TODO: change '/postToAPIForFlightData' to the actual URL for our site
   app.get('/getflights', function(req, res) {
-  
+
     User.findAll().then(function(user) {
       console.log(user);
     }).then(function(){
-      res.send(200)      
+      res.send(200)
     })
 
   // POST to Google's QPX API
@@ -51,7 +51,7 @@ module.exports = function(app) {
         'slice': [
           {
             'origin': req.body.origin, // Ex: 'SFO'
-            'destination': req.body.destination, // 'LAX' 
+            'destination': req.body.destination, // 'LAX'
             'date': req.body.date // '2015-06-01'
           }
         ],
@@ -65,7 +65,7 @@ module.exports = function(app) {
         'solutions': 5, // We really only need 1 solution for MVP
         'maxPrice': req.body.maxPrice, // 'USD100.00'
         'refundable': false // Default to false
-      } 
+      }
     };
 
     //  Sends the request to QPX
@@ -78,8 +78,20 @@ module.exports = function(app) {
       console.log(body);
       // TODO: add logic to send an email when a successful response occurs
       // add code here
+
+
+      // var saleTotal  = response.trips.tripOption[0].pricing[0].saleTotal; //"USD69.00"
+      // var budget = user.budget;
+
+      //if (saleTotal === budget) {
+        var user = /*...*/;
+        user.sent = true;
+        user.save().then(function() {
+          //send email
+        });
+      // }
     });
-   
+
 
    // POST to Sky Scanner API
    // request.post(SkyScannerSessionOptions, function(err, res, body) {
@@ -91,16 +103,24 @@ module.exports = function(app) {
    //    url: 'http://partners.api.skyscanner.net/apiservices/pricing/v1.0/{' + res.headers.Location + '}?apiKey={apiKey}'
    //  };
    //  request(skySkanneroptions, function(err, res, body) {
-    
+
    //  });
    // });
 
   });
-  app.post('/userToDatabase', function(req, res) {
-    request(options, function(err, res, body) {
+  app.post('/usertodatabase', function(req, res) {
 
-
+    User.create({
+      email: req.body.email,
+      origin: req.body.home,
+      destination: req.body.destination,
+      budget: req.body.budget,
+      sent: false
+    })
+    .then(function(){
+      res.status(200);
     });
+
   });
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
