@@ -16,13 +16,13 @@ var User = sequelize.define('User', {
   timestamps: true
 });
 
-sequelize.sync().then(function(){
-  // User.create({
-  //   email: 'janedoe',
-  //   origin: 'LAX',
-  //   destination: 'SAN',
-  //   budget: 123.45
-  // });
-});
+// sequelize.sync().then(function(){
+//   // User.create({
+//   //   email: 'janedoe',
+//   //   origin: 'LAX',
+//   //   destination: 'SAN',
+//   //   budget: 123.45
+//   // });
+// });
 
 module.exports = User;
