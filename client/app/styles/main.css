@@ -1,4 +1,5 @@
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+<!doctype css>
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -7056,3 +7057,5 @@ h1 {
 
 .btn-next {
   margin-top: 35px; }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
