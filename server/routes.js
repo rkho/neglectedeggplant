@@ -6,106 +6,106 @@
 var User = require('./db/schema.js');
 var errors = require('./components/errors');
 var request = require('request') // The express method for requesting data from an API
+var triggerEmail = require('./components/emails/trigger-email.js');
+
 // var data = require('/client/app/airportdata/airports.json');
 module.exports = function(app) {
 
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
 
-  // Sky Scanner requires a session POST request before you can access their API
-  // the sessions options below are required to proceed to data fetching
-
-  // var SkyScannerSessionOptions = {
-  //   apiKey: '',
-  //   url: 'http://partners.api.skyscanner.net/apiservices/pricing/v1.0',
-  //   header: {
-  //    'Content-Type': 'application/x-www-form-urlencoded',
-  //    'Accept': 'application/json'
-  //   },
-  //   country: '',
-  //   locale: '',
-  //   originplace: '',
-  //   destinationplace: '',
-  //   method : 'GET',
-  //   inbounddate: '',
-  //   outbounddate: '',
-  // };
-
-  //  TODO: change '/postToAPIForFlightData' to the actual URL for our site
+  
   app.get('/getflights', function(req, res) {
 
-    User.findAll().then(function(user) {
-      console.log(user);
-    }).then(function(){
-      res.send(200)
-    })
+    res.send(200);
 
-  // POST to Google's QPX API
-  // Google QPX options requires only the standard options object
-    var key = 'key=' + ourAPIkey;
+    User.findAll({ where: { sent: false } }).then(function(users) {
+      users.forEach(function(user){
 
-    // variables must be on the req.body to fill in the origin, destination, data and maxPrice
-    var QPXOptions = {
-      // Adds our API key to the end of the url for our post to the API
-      'url': 'https://www.googleapis.com/qpxExpress/v1/trips/search?' + key,
-      'request': {
-        'slice': [
-          {
-            'origin': req.body.origin, // Ex: 'SFO'
-            'destination': req.body.destination, // 'LAX'
-            'date': req.body.date // '2015-06-01'
+        //Create a date three months from now.
+        //Get date and add 60*60*24*90 seconds.
+        //We should abstract this into a module after MVP.
+        var today = Math.floor(Date.now() / 1000);
+        var threeMonths = 60*60*24*90;
+        var future = new Date((today+threeMonths) * 1000);
+        var year = future.getFullYear();
+        //JS months are zero-indexed. Add 1 and pad with a 0 if less than 9. E.g. 2 becomes 03.
+        var month = (future.getMonth()+1) > 9 ? future.getMonth()+1 : "0"+(future.getMonth()+1);
+        var day = future.getDate();
+        var searchDate = year+'-'+month+'-'+day;
+
+        // POST to Google's QPX API
+        // Google QPX options requires only the standard options object
+        var key = 'key=' + process.env['GGLQPX_API_KEY'];
+
+        var QPXOptions = {
+          'slice':[{
+                'origin': user.get('origin'), // Ex: 'SFO'
+                'destination': user.get('destination'), // 'LAX'
+                'date': searchDate // '2015-06-01'
+                }],
+          'passengers':{ 'adultCount': 1 },
+          'maxPrice': 'USD'+user.get('budget') // 'USD100.00'
+        };
+
+        var options = {
+          uri: 'https://www.googleapis.com/qpxExpress/v1/trips/search?'+key,
+          method: 'POST',
+          json: {request: QPXOptions}
+        };
+
+        request.post(options, function(err, res, body) {
+    
+          if(err){ console.log(err) }
+          
+          if (res.body.trips !== undefined){ //Flight found
+            
+            var cheapestIndex = 0;
+            var cheapestPrice = Infinity;
+
+            res.body.trips.tripOption.forEach(function(flight, index){
+              if (flight.pricing[0].saleTotal.replace("USD","")<cheapestPrice){
+                cheapestIndex = index;
+                cheapestPrice = flight.pricing[0].saleTotal.replace("USD","");
+              }
+            })
+
+            var flight = res.body.trips.tripOption[cheapestIndex];
+            var departure = flight.slice[0].segment[0].leg[0].departureTime.split("T");
+
+            var formattedDeparture = departure[0] + " at " + departure[1].split("-")[0];
+
+            triggerEmail(
+              user.get('email'),
+              {
+                origin: user.get('origin'),
+                destination: user.get('destination'),
+                price: parseFloat(flight.pricing[0].saleTotal.replace("USD","")).toFixed(2),
+                carrier: flight.slice[0].segment[0].flight.carrier,
+                departure: formattedDeparture,
+                proceedUrl: 'https://www.google.com/flights/#search;f='+user.get('origin')+';t='+user.get('destination')+';d='+searchDate+';tt=o'
+              },
+              {
+                success: function(){
+                  //Mark 'sent' as true so the user only gets one email.
+                  console.log("Send email!");
+                  user.set('sent', true).save();
+                },
+                error: function(err){
+                  console.log(err)
+                }
+              }
+            );
+                      
+          }else{
+            console.log("No flights found");
           }
-        ],
-        'passengers': {
-          'adultCount': 1, // Will always be one
-          'infantInLapCount': 0, // Default other passenger options to 0 for MVP
-          'infantInSeatCount': 0,
-          'childCount': 0,
-          'seniorCount': 0
-        },
-        'solutions': 5, // We really only need 1 solution for MVP
-        'maxPrice': req.body.maxPrice, // 'USD100.00'
-        'refundable': false // Default to false
-      }
-    };
 
-    //  Sends the request to QPX
-    request.post(QPXOptions, function(err, res, body) {
-      if(err) {
-        console.error(err);
-      }
-
-      // For now just log out the successful res.body
-      console.log(body);
-      // TODO: add logic to send an email when a successful response occurs
-      // add code here
-
-
-      // var saleTotal  = response.trips.tripOption[0].pricing[0].saleTotal; //"USD69.00"
-      // var budget = user.budget;
-
-      //if (saleTotal === budget) {
-        // var user = /*...*/;
-        // user.sent = true;
-        // user.save().then(function() {
-        //   //send email
-        // });
-      // }
+        });
+      
+      });
+      
     });
-
-   // POST to Sky Scanner API
-   // request.post(SkyScannerSessionOptions, function(err, res, body) {
-   //  console.log(body)
-   //  var skyScanneroptions = {
-   //    apiKey: '',
-   //    originairports: '',
-   //    destinationairports: '',
-   //    url: 'http://partners.api.skyscanner.net/apiservices/pricing/v1.0/{' + res.headers.Location + '}?apiKey={apiKey}'
-   //  };
-   //  request(skySkanneroptions, function(err, res, body) {
-
-   //  });
-   // });
 
   });
   app.post('/usertodatabase', function(req, res) {
