@@ -10,16 +10,21 @@
  */
 angular.module('wayfareApp')
   .controller('MainCtrl', function ($scope, $http, myFactory) {
+    $http.get('getAirportData')
+      .then(function(res){
+        console.log(res);
+        $scope.data = res.data;
+      })
     $scope.getLocation = function(val) {
-      return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
+      return $http.get('getAirportData', {
         params: {
-          address: val,
-          sensor: false
+          name: val,
+          // sensor: false
         }
       }).then(function(response){
         // console.log(response);
-        return response.data.results.map(function(item){
-          return item.formatted_address;
+        return response.data.map(function(item){
+          return item.name;
         });
       });
     };
