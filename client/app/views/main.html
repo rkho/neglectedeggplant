@@ -4,9 +4,9 @@
     <h1>Where would you like to go?</h1>
     <div ui-view></div>
     
-    <input type="text" ng-model="asyncSelected" placeholder="Type in a city name" typeahead="code for code in getLocation($viewValue)" class="form-control text-center" ng-required="true">
+    <input type="text" ng-model="selected" placeholder="Type in a city name" typeahead="data.name + ' - ' + data.code for data in data | filter:$viewValue | limitTo:8" class="form-control text-center" ng-required="true">
 
-    <a href="#/location" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!asyncSelected" ng-click="submit('destination', asyncSelected)">NEXT</a>
+    <a href="#/location" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!selected" ng-click="submit('destination', selected)">NEXT</a>
     </div>
   </form>
 </div>
