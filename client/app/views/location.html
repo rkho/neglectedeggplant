@@ -4,10 +4,10 @@
     <h1>{{ getDestination }}, huh? Where are you coming from?</h1>
     <div ui-view></div>
     <form name="airportName">
-    <input type="text" ng-model="location" placeholder="Type in a city name" typeahead="data.name + ' - ' + data.code for data in data | filter:$viewValue | limitTo:8" class="form-control text-center" ng-required="true">
+    <input type="text" ng-model="home" placeholder="Type in a city name" typeahead="data.name + ' - ' + data.code for data in data | filter:$viewValue | limitTo:8" class="form-control text-center" ng-required="true">
 
 
-    <a href="#/budget" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!location" ng-click="submit('home', location)">NEXT</a>
+    <a href="#/budget" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!home" ng-click="submit('home', home)">NEXT</a>
     </form>
     </div>
   </form>

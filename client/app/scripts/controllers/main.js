@@ -23,8 +23,14 @@ angular.module('wayfareApp')
     var service = {};
     // This will take in a key/value pair. Key is either 'destination', 'location', or 'budget' based on which view we're collecting information.
     service.sendData = function(key, value){
-      // Line 27 is only necessary if the key is NOT budget, because the string passed along to value is a concatenation of airport data's name + airport code, and we only want the airport code in the end.
-      if (key !== 'budget') this[key] = value.substr(-3);
+      // Line 27 is only necessary if the key is NOT budget or email, because the string passed along to value is a concatenation of airport data's name + airport code, and we only want the airport code in the end.
+      if (key === 'destination' || key === 'home'){
+        this[key] = value.substr(-3);
+      }
+      if (key === 'budget' || key === 'email') {
+        this[key] = value;
+      }
+      console.log(this);
     }
     return service;
   })
