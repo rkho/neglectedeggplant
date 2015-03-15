@@ -2,9 +2,10 @@
 
 // This main module basically controls the entire functionality of our single-page app.
 angular.module('wayfareApp')
-  .controller('MainCtrl', function ($scope, $http, myFactory) {
+  .controller('MainCtrl', function ($scope, $http, myFactory, $modal, $location) {
     // data is an undefined variable until it gets populated on line 9
     $scope.data;
+    $scope.custObj = {};
     // Get request to 'getAirportData' which is routed in routes.js on the server side, which grabs our Airports.JSON data and assigns the entire object to the $scope.data variable on line 7 above.
     $http.get('getAirportData')
       .then(function(res){
@@ -14,10 +15,27 @@ angular.module('wayfareApp')
     $scope.submit = function(key, value){
       myFactory.sendData(key, value);
     };
-    // Three 'getter' functions to access the factory data stored. This is done because Angular controllers reset themselves whenever a view is changed.
-    $scope.getDestination = myFactory.destination;
-    $scope.getHome = myFactory.home;
-    $scope.getBudget = myFactory.budget;
+    // Four 'getter' functions to access the factory data stored. This is done because Angular controllers reset themselves whenever a view is changed.
+    $scope.custObj.getDestination = myFactory.destination;
+    $scope.custObj.getHome = myFactory.home;
+    $scope.custObj.getBudget = myFactory.budget;
+    $scope.custObj.getEmail = myFactory.email;
+
+
+    // Opens a modal
+    $scope.open = function(){
+      var modalInstance = $modal.open({
+        templateUrl: 'app/views/modal.html',
+        controller: 'MainCtrl'
+      })
+    }
+
+    $scope.success = function(){
+      $scope.custObj.getEmail = myFactory.email;
+      $http.post('usertodatabase', $scope.custObj)
+    }
+
+
   })
   .factory('myFactory', function(){
     var service = {};

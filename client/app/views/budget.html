@@ -1,12 +1,12 @@
 <div class="text-center">
   <form class="container">
     <div class="col-sm-12">
-    <h1>Escaping {{ getHome }} and going to {{ getDestination }}? Awesome. What's the most you'll pay?</h1>
+    <h1>Escaping {{ custObj.getHome }} and going to {{ custObj.getDestination }}? Awesome. What's the most you'll pay?</h1>
     <div ui-view></div>
     <form name="airportName">
     <input type="number" ng-model="budget" placeholder="Your budget" class="form-control text-center" ng-required="true">
 
-    <a href="#/budget" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!budget" ng-click="submit('budget', budget)">NEXT</a>
+    <a href="#/budget" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!budget" ng-click="submit('budget', budget); open()">NEXT</a>
     </form>
     </div>
   </form>
