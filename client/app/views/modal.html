@@ -7,8 +7,8 @@
             <a ng-click="selected.item = item">{{ item }}</a>
         </li>
     </ul>
-    <h3>You want to escape <b> {{ custObj.getHome }}</b> and visit <b>{{ custObj.getDestination }}.</b></h3>
-    <h3>At <b>most</b>, you'd like to spend <b>${{ custObj.getBudget }}.</b></h3>
+    <h3>You want to escape <b> {{ custObj.home }}</b> and visit <b>{{ custObj.destination }}.</b></h3>
+    <h3>At <b>most</b>, you'd like to spend <b>${{ custObj.budget }}.</b></h3>
     <h3>If we can find a deal, where can we reach you?</h3>
 
     <form name="emailForm" novalidate>
@@ -26,6 +26,6 @@
 
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="submit('email', email); close(); success();">OK</button>
+    <button class="btn btn-primary" ng-click="custObj.sendData('email', email); success(); ok()">OK</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
