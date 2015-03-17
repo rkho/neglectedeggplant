@@ -47,10 +47,9 @@ module.exports = function(app) {
 
         request.post(options, function(err, res, body) {
     
-          if(err){ console.log(err) }
+          if(err){ console.log(err); console.log(err.error.errors) }
         
           console.log(res.body)
-        console.log(server.address.address)
 
           if (res.body.trips !== undefined){ //Flight found
             
