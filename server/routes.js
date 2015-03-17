@@ -15,24 +15,6 @@ module.exports = function(app) {
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
 
-  app.get('/test-production-db', function(req, res) {
-    User.sync().then(function(err){
-      User.create({
-        email: 'j@doe.com',
-        origin: 'LAX',
-        destination: 'SAN',
-        budget: 123.45
-      }).then(function(err){
-
-            User.findAll({ where: { email: 'j@doe.com' } }).then(function(users) {
-              console.log(users);
-            })
-
-      });
-    });
-    res.send(200);
-  });
-
   app.get('/getflights', function(req, res) {
 
     res.send(200);
@@ -59,6 +41,8 @@ module.exports = function(app) {
           method: 'POST',
           json: {request: QPXOptions}
         };
+
+        console.log(options);
 
         request.post(options, function(err, res, body) {
     
@@ -104,7 +88,7 @@ module.exports = function(app) {
             );
                       
           }else{
-            console.log("No flights found");
+            console.log("no flights found");
           }
 
         });
