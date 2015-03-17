@@ -42,6 +42,8 @@ module.exports = function(app) {
           json: {request: QPXOptions}
         };
 
+        console.log(options);
+
         request.post(options, function(err, res, body) {
     
           if(err){ console.log(err) }
@@ -86,7 +88,7 @@ module.exports = function(app) {
             );
                       
           }else{
-            console.log("No flights found");
+
           }
 
         });
