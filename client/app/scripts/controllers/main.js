@@ -21,14 +21,13 @@ angular.module('wayfareApp')
     }
   })
   .controller('ModalInstanceCtrl', function($scope, $modalInstance, $http, myFactory){
-    $scope.submit = function(key, value){
-      myFactory.sendData(key, value);
-    }
+    // This controller is used specifically for the modeal that appears which requests for the user's email as the last part of the submission process.
     $scope.custObj = myFactory;
-
+    // This function closes the modal.
     $scope.ok = function(){
       $modalInstance.close();
     }
+    // This function sends the entire factory object to the database (which will send the destination, home location, budget, and email address).
     $scope.success = function(){
       $http.post('usertodatabase', myFactory)
     }
@@ -37,7 +36,7 @@ angular.module('wayfareApp')
     var service = {};
     // This will take in a key/value pair. Key is either 'destination', 'location', or 'budget' based on which view we're collecting information.
     service.sendData = function(key, value){
-      // This line below is only necessary if the key is NOT budget or email, because the string passed along to value is a concatenation of airport data's name + airport code, and we only want the airport code in the end.
+      // We only want the airport code, which happens to be the last three characters of the string if we're setting a Destination or Home property.
       if (key === 'destination' || key === 'home'){
         this[key] = value.substr(-3);
       }
