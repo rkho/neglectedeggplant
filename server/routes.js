@@ -7,6 +7,7 @@ var User = require('./db/schema.js');
 var errors = require('./components/errors');
 var request = require('request') // The express method for requesting data from an API
 var triggerEmail = require('./components/emails/trigger-email.js');
+var daysFromNow = require('./components/days-from-now.js');
 
 // var data = require('/client/app/airportdata/airports.json');
 module.exports = function(app) {
@@ -22,18 +23,6 @@ module.exports = function(app) {
     User.findAll({ where: { sent: false } }).then(function(users) {
       users.forEach(function(user){
 
-        //Create a date three months from now.
-        //Get date and add 60*60*24*90 seconds.
-        //We should abstract this into a module after MVP.
-        var today = Math.floor(Date.now() / 1000);
-        var threeMonths = 60*60*24*90;
-        var future = new Date((today+threeMonths) * 1000);
-        var year = future.getFullYear();
-        //JS months are zero-indexed. Add 1 and pad with a 0 if less than 9. E.g. 2 becomes 03.
-        var month = (future.getMonth()+1) > 9 ? future.getMonth()+1 : "0"+(future.getMonth()+1);
-        var day = future.getDate();
-        var searchDate = year+'-'+month+'-'+day;
-
         // POST to Google's QPX API
         // Google QPX options requires only the standard options object
         var key = 'key=' + process.env['GGLQPX_API_KEY'];
@@ -42,7 +31,7 @@ module.exports = function(app) {
           'slice':[{
                 'origin': user.get('origin'), // Ex: 'SFO'
                 'destination': user.get('destination'), // 'LAX'
-                'date': searchDate // '2015-06-01'
+                'date': daysFromNow(90) // '2015-06-01'
                 }],
           'passengers':{ 'adultCount': 1 },
           'maxPrice': 'USD'+user.get('budget') // 'USD100.00'
@@ -135,7 +124,6 @@ module.exports = function(app) {
   // All other routes should redirect to the index.html
   app.route('/*')
     .get(function(req, res) {
-      console.log(req);
       res.sendfile((app.get('appPath') + '/index.html'), req.query);
     });
 };
