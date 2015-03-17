@@ -48,7 +48,9 @@ module.exports = function(app) {
         request.post(options, function(err, res, body) {
     
           if(err){ console.log(err) }
-          
+        
+          console.log(res.body)
+
           if (res.body.trips !== undefined){ //Flight found
             
             var cheapestIndex = 0;
