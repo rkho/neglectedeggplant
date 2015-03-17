@@ -1,9 +1,9 @@
 var Sequelize = require('sequelize');
 
-var sequelize = new Sequelize('', '', '', {
+var sequelize = new Sequelize('cleardbmysqldatabase', '', '', {
   // host: 'localhost',
-  dialect: 'sqlite',
-  storage: 'db/database.sqlite'
+  dialect: 'mysql',
+  // storage: 'db/database.sqlite'
 });
 
 var User = sequelize.define('User', {
