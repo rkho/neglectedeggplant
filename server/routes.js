@@ -45,6 +45,8 @@ module.exports = function(app) {
         console.log(options);
         console.log(options.json.request.slice);
 
+        
+
         request.post(options, function(err, res, body) {
     
           if(err){ console.log(err); console.log(err.error.errors) }
@@ -122,6 +124,11 @@ module.exports = function(app) {
   // This will get the airport JSON data and return it to the user during a search.
   app.route('/getAirportData')
     .get(function(req, res){
+      request.get({uri: 'http://ip-api.com/json', method: 'GET'}, function(err, res, body){
+          console.log(err);
+          console.log(res);
+          console.log(body);
+        });
       res.sendfile(app.get('appPath') + '/app/airportdata/airports.json');
     })
 
