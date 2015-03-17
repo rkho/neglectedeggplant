@@ -16,32 +16,22 @@ module.exports = function(app) {
   app.use('/api/things', require('./api/thing'));
 
   app.get('/test-production-db', function(req, res) {
-      res.send(200);
-  })
+    User.sync().then(function(err){
+      User.create({
+        email: 'j@doe.com',
+        origin: 'LAX',
+        destination: 'SAN',
+        budget: 123.45
+      }).then(function(err){
 
-  app.get('/test-production-email', function(req, res) {
-    triggerEmail(
-      'scott@howrefreshing.com.au',
-      {
-        origin: 'SYDNEY - FROM PRODUCTION',
-        destination: 'GOLD COAST',
-        price: 100,
-        carrier: 'Qantas',
-        departure: '10/11/15',
-        proceedUrl: 'http://google.com'
-      },
-      {
-        success: function(){
-          console.log("Sent email!");
-        },
-        error: function(err){
-          console.log("Email error");
-          console.log(err)
-        }
-      }
-    );
+            User.findAll({ where: { email: 'j@doe.com' } }).then(function(users) {
+              console.log(users);
+            })
+
+      });
+    });
     res.send(200);
-  })
+  });
 
   app.get('/getflights', function(req, res) {
 
