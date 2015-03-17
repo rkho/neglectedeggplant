@@ -88,7 +88,7 @@ module.exports = function(app) {
             );
                       
           }else{
-
+            console.log("no flights found");
           }
 
         });
