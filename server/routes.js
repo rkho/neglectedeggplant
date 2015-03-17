@@ -43,7 +43,7 @@ module.exports = function(app) {
         };
 
         console.log(options);
-        console.log(options.slice);
+        console.log(options.json.request.slice);
 
         request.post(options, function(err, res, body) {
     
