@@ -14,6 +14,7 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
+    // ui.bootstrap is a dependency necessary for the Angular-specific Bootstrap code that I have in the front-end.
     'ui.bootstrap'
   ])
   .config(function ($routeProvider) {
@@ -28,6 +29,10 @@ angular
       })
       .when('/budget', {
         templateUrl: 'app/views/budget.html',
+        controller: 'MainCtrl'
+      })
+      .when('/finished', {
+        templateUrl: 'app/views/finished.html',
         controller: 'MainCtrl'
       })
       .otherwise({

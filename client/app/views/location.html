@@ -4,6 +4,7 @@
     <h1>{{ custObj.destination }}, huh? Where are you coming from?</h1>
     <div ui-view></div>
     <form name="airportName">
+    <!-- Again, same code like we saw in main.html -->
     <input type="text" ng-model="home" placeholder="Type in a city name" typeahead="data.name + ' - ' + data.code for data in data | filter:$viewValue | limitTo:8" class="form-control text-center" ng-required="true">
 
 
