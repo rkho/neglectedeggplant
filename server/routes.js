@@ -15,7 +15,34 @@ module.exports = function(app) {
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
 
-  
+  app.get('/test-production-db', function(req, res) {
+      res.send(200);
+  })
+
+  app.get('/test-production-email', function(req, res) {
+    triggerEmail(
+      'scott@howrefreshing.com.au',
+      {
+        origin: 'SYDNEY - FROM PRODUCTION',
+        destination: 'GOLD COAST',
+        price: 100,
+        carrier: 'Qantas',
+        departure: '10/11/15',
+        proceedUrl: 'http://google.com'
+      },
+      {
+        success: function(){
+          console.log("Sent email!");
+        },
+        error: function(err){
+          console.log("Email error");
+          console.log(err)
+        }
+      }
+    );
+    res.send(200);
+  })
+
   app.get('/getflights', function(req, res) {
 
     res.send(200);
