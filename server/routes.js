@@ -25,12 +25,12 @@ module.exports = function(app) {
         // POST to Google's QPX API
         // Google QPX options requires only the standard options object
         var key = 'key=' + process.env['GGLQPX_API_KEY'];
-
+        var searchDate = daysFromNow(90);
         var QPXOptions = {
           'slice':[{
                 'origin': user.get('origin'), // Ex: 'SFO'
                 'destination': user.get('destination'), // 'LAX'
-                'date': daysFromNow(90) // '2015-06-01'
+                'date': searchDate // '2015-06-01'
                 }],
           'passengers':{ 'adultCount': 1 },
           'maxPrice': 'USD'+user.get('budget') // 'USD100.00'
@@ -42,17 +42,10 @@ module.exports = function(app) {
           json: {request: QPXOptions}
         };
 
-        console.log(options);
-        console.log(options.json.request.slice);
-
-        
-
         request.post(options, function(err, res, body) {
     
           if(err){ console.log(err); console.log(err.error.errors) }
-        
-          console.log(res.body)
-
+      
           if (res.body.trips !== undefined){ //Flight found
             
             var cheapestIndex = 0;
@@ -124,11 +117,6 @@ module.exports = function(app) {
   // This will get the airport JSON data and return it to the user during a search.
   app.route('/getAirportData')
     .get(function(req, res){
-      request.get({uri: 'http://ip-api.com/json', method: 'GET'}, function(err, res, body){
-          console.log(err);
-          console.log(res);
-          console.log(body);
-        });
       res.sendfile(app.get('appPath') + '/app/airportdata/airports.json');
     })
 
