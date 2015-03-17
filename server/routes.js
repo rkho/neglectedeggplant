@@ -50,6 +50,7 @@ module.exports = function(app) {
           if(err){ console.log(err) }
         
           console.log(res.body)
+        console.log(server.address.address)
 
           if (res.body.trips !== undefined){ //Flight found
             
