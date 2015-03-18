@@ -12,20 +12,14 @@
     <h3>If we can find a deal, where can we reach you?</h3>
 
     <form name="emailForm" novalidate>
-
       <div class="form-group" ng-class="{ 'has-error' : emailFieldForm.email.$invalid }">
       <ng-form name="emailFieldForm">
-        <input type="email" class="form-control" name="email" ng-model="email" ng-required="true">
+        <input type="email" class="email-form" name="email" ng-model="email" ng-required="true">
         <p class="help-block" ng-show="emailFieldForm.email.$invalid">Valid Email Required</p>
         </ng-form>
-
         </div>
-
     </form>
-
-
 </div>
 <div class="modal-footer">
-    <a href="#/finished" class="btn btn-primary" ng-click="custObj.sendData('email', email); success(); ok()">OK</a>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <a href="#/finished" class="btn btntwo btn-primary" ng-disabled="!email" ng-click="custObj.sendData('email', email); success(); ok()">OK</a>
 </div>
