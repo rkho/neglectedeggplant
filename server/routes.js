@@ -101,7 +101,16 @@ module.exports = function(app) {
       sent: false
     })
     .then(function(){
-      res.status(200);
+      res.send(200);
+    });
+
+  });
+
+  app.get('/remotedetails', function(req, res) {
+    res.send(200);
+    
+    request.get({ uri: "http://ip-api.com/json"}, function(err, res, body) {
+      console.log(res.body);
     });
 
   });
