@@ -38,7 +38,7 @@ angular.module('wayfareApp')
     service.sendData = function(key, value){
       // We only want the airport code, which happens to be the last three characters of the string if we're setting a Destination or Home property.
       if (key === 'destination' || key === 'home'){
-        this[key] = value.substr(-3);
+        this[key] = value.substr(-3); // change to pull data.code instead of substring
       }
       if (key === 'budget' || key === 'email') {
         this[key] = value;
