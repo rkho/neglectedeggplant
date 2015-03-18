@@ -19,7 +19,6 @@ var User = sequelize.define('User', {
 });
 
 //sequelize.sync().then(function(err){
-
   // User.create({
   //   email: 'janedoe',
   //   origin: 'LAX',

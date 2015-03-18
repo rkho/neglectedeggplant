@@ -15,24 +15,6 @@ module.exports = function(app) {
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
 
-  app.get('/test-production-db', function(req, res) {
-    User.sync().then(function(err){
-      User.create({
-        email: 'j@doe.com',
-        origin: 'LAX',
-        destination: 'SAN',
-        budget: 123.45
-      }).then(function(err){
-
-            User.findAll({ where: { email: 'j@doe.com' } }).then(function(users) {
-              console.log(users);
-            })
-
-      });
-    });
-    res.send(200);
-  });
-
   app.get('/getflights', function(req, res) {
 
     res.send(200);
@@ -43,12 +25,12 @@ module.exports = function(app) {
         // POST to Google's QPX API
         // Google QPX options requires only the standard options object
         var key = 'key=' + process.env['GGLQPX_API_KEY'];
-
+        var searchDate = daysFromNow(90);
         var QPXOptions = {
           'slice':[{
                 'origin': user.get('origin'), // Ex: 'SFO'
                 'destination': user.get('destination'), // 'LAX'
-                'date': daysFromNow(90) // '2015-06-01'
+                'date': searchDate // '2015-06-01'
                 }],
           'passengers':{ 'adultCount': 1 },
           'maxPrice': 'USD'+user.get('budget') // 'USD100.00'
@@ -62,8 +44,8 @@ module.exports = function(app) {
 
         request.post(options, function(err, res, body) {
     
-          if(err){ console.log(err) }
-          
+          if(err){ console.log(err); console.log(err.error.errors) }
+      
           if (res.body.trips !== undefined){ //Flight found
             
             var cheapestIndex = 0;
@@ -104,7 +86,7 @@ module.exports = function(app) {
             );
                       
           }else{
-            console.log("No flights found");
+            console.log("no flights found");
           }
 
         });
