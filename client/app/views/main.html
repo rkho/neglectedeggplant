@@ -8,11 +8,14 @@
 
     Within that JSON object, only show results that match the value typed into this form by filtering it, and limit the results to a maximum of eight to prevent an extremely long list from forming -->
     <input type="text" ng-model="selected" placeholder="Type in a city name" typeahead="data.name + ' - ' + data.code for data in data | filter:$viewValue | limitTo:8" class="form-control text-center" ng-required="true">
-    
     <!-- When the 'NEXT' button is clicked, we invoke sendData from the factory object, setting a 'destination' property to it and passing along the value in the model above.
 
     This button is also disabled unless a value is entered into the model above, preventing empty submission -->
     <a href="#/location" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!selected" ng-click="custObj.sendData('destination', selected)">NEXT</a>
     </div>
   </form>
+    <hr>
+    <div class="container">
+        <h3>Can't decide? We understand. Here's some popular choices:</h3>
+    </div>
 </div>
