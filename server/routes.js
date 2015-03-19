@@ -33,7 +33,8 @@ module.exports = function(app) {
                 'date': searchDate // '2015-06-01'
                 }],
           'passengers':{ 'adultCount': 1 },
-          'maxPrice': 'USD'+user.get('budget') // 'USD100.00'
+          'maxPrice': 'USD'+user.get('budget'), // 'USD100.00'
+          'solutions': 1
         };
 
         var options = {
@@ -45,22 +46,16 @@ module.exports = function(app) {
         request.post(options, function(err, res, body) {
     
           if(err){ console.log(err); console.log(err.error.errors) }
-      
+          
+          //For debugging production
+          console.log("Checking: ", user.get('email'), user.get('origin'), user.get('destination'), " -> ", user.get('budget'))
+          console.log(res.body);
+          console.log(res.body.trips);
+
           if (res.body.trips !== undefined){ //Flight found
             
-            var cheapestIndex = 0;
-            var cheapestPrice = Infinity;
-
-            res.body.trips.tripOption.forEach(function(flight, index){
-              if (flight.pricing[0].saleTotal.replace("USD","")<cheapestPrice){
-                cheapestIndex = index;
-                cheapestPrice = flight.pricing[0].saleTotal.replace("USD","");
-              }
-            })
-
-            var flight = res.body.trips.tripOption[cheapestIndex];
+            var flight = res.body.trips.tripOption[0];
             var departure = flight.slice[0].segment[0].leg[0].departureTime.split("T");
-
             var formattedDeparture = departure[0] + " at " + departure[1].split("-")[0];
 
             triggerEmail(
@@ -68,7 +63,7 @@ module.exports = function(app) {
               {
                 origin: user.get('origin'),
                 destination: user.get('destination'),
-                price: parseFloat(flight.pricing[0].saleTotal.replace("USD","")).toFixed(2),
+                price: parseFloat(flight.saleTotal.replace("USD","")).toFixed(2),
                 carrier: flight.slice[0].segment[0].flight.carrier,
                 departure: formattedDeparture,
                 proceedUrl: 'https://www.google.com/flights/#search;f='+user.get('origin')+';t='+user.get('destination')+';d='+searchDate+';tt=o'
@@ -76,7 +71,7 @@ module.exports = function(app) {
               {
                 success: function(){
                   //Mark 'sent' as true so the user only gets one email.
-                  console.log("Send email!");
+                  console.log("Send email!", user.get('email'), parseFloat(flight.saleTotal.replace("USD","")).toFixed(2));
                   user.set('sent', true).save();
                 },
                 error: function(err){
@@ -106,7 +101,16 @@ module.exports = function(app) {
       sent: false
     })
     .then(function(){
-      res.status(200);
+      res.send(200);
+    });
+
+  });
+
+  app.get('/remotedetails', function(req, res) {
+    res.send(200);
+    
+    request.get({ uri: "http://ip-api.com/json"}, function(err, res, body) {
+      console.log(res.body);
     });
 
   });
