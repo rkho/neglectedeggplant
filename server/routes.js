@@ -15,6 +15,7 @@ module.exports = function(app) {
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
 
+  // This route is triggered by Azure web jobs once a day.
   app.get('/getflights', function(req, res) {
 
     res.send(200);
@@ -52,7 +53,7 @@ module.exports = function(app) {
           console.log(res.body);
           console.log(res.body.trips);
 
-          if (res.body.trips !== undefined){ //Flight found
+          if (res.body.trips !== undefined && res.body.trips.tripOption !== undefined){ //Flight found
             
             var flight = res.body.trips.tripOption[0];
             var departure = flight.slice[0].segment[0].leg[0].departureTime.split("T");
@@ -75,7 +76,7 @@ module.exports = function(app) {
                   user.set('sent', true).save();
                 },
                 error: function(err){
-                  console.log(err)
+                  console.log(err);
                 }
               }
             );
@@ -91,6 +92,8 @@ module.exports = function(app) {
     });
 
   });
+
+  // Create new user from form submission.
   app.post('/usertodatabase', function(req, res) {
 
     User.create({
@@ -106,6 +109,7 @@ module.exports = function(app) {
 
   });
 
+  // If we hit this URL, the server logs it's IP.
   app.get('/remotedetails', function(req, res) {
     res.send(200);
     
