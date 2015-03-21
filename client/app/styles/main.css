@@ -103,3 +103,46 @@ hr {
   font-size: 18px;
   line-height: 20px;
 }
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: 250px;
+}
+
+.hero {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: bottom center;
+  clear: both;
+  text-align: center;
+  vertical-align: middle;
+}
+
+video {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  position: relative;
+  object-fit: cover;
+  clear: both;
+  overflow: auto;
+  display: block;
+  clear: both;
+/*  background: url(../images/hero.png) no-repeat;
+*/  background-size: cover;
+  background-position: bottom center;
+  -webkit-transition: 1s opacity;
+  transition: 1s opacity;
+}
+
+.top-buffer {
+  margin-top: 150px;
+}

@@ -1,7 +1,7 @@
 <div class="text-center">
   <form class="container">
     <div class="col-sm-12">
-    <h1>Escaping {{ custObj.home }} and going to {{ custObj.destination }}? Awesome. What's the most you'll pay?</h1>
+    <h1>Going from {{ custObj.home }} to {{ custObj.destination }}? Awesome. What's the most you'll pay?</h1>
     <div ui-view></div>
     <form name="airportName">
     <input type="number" ng-model="budget" placeholder="Your budget" class="form-control text-center" ng-required="true">
@@ -10,4 +10,6 @@
     </form>
     </div>
   </form>
+  <hr>
+  <h3>We all make choices we regret. It's not too late to start over with one of these:</h3>
 </div>
