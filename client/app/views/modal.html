@@ -7,9 +7,9 @@
             <a ng-click="selected.item = item">{{ item }}</a>
         </li>
     </ul>
-    <h3>You want to escape <b> {{ custObj.home }}</b> and visit <b>{{ custObj.destination }}.</b></h3>
+    <h3>You're traveling from <b> {{ custObj.home }}</b> to <b>{{ custObj.destination }}.</b></h3>
     <h3>At <b>most</b>, you'd like to spend <b>${{ custObj.budget }}.</b></h3>
-    <h3>If we can find a deal, where can we reach you?</h3>
+    <h3>If we find a deal, where can we reach you?</h3>
 
     <form name="emailForm" novalidate>
       <div class="form-group" ng-class="{ 'has-error' : emailFieldForm.email.$invalid }">
