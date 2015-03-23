@@ -16,12 +16,17 @@
       <div class="form-group" ng-class="{ 'has-error' : emailFieldForm.email.$invalid }">
       <ng-form name="emailFieldForm">
         <input type="email" class="email-form" name="email" placeholder="Enter an email address" ng-model="email" ng-required="true">
-        <p class="help-block" ng-show="emailFieldForm.email.$invalid">Valid Email Required</p>
+        <p class="help-block" ng-show="emailFieldForm.email.$invalid && emailFieldForm.email.$dirty">Valid Email Required</p>
         </ng-form>
         <br />
-        <h4>Would you like to receive a text?</h4>
-        <input type="tel" class="email-form" name="phone" placeholder="Enter a phone number" ng-model="phone" ng-required="true">
+
+        <h4>Would you like to receive a text? (Optional)</h4>
+        <div class="form-group" ng-class="{ 'has-error' : phoneFieldForm.phone.$invalid }">
+        <ng-form name="phoneFieldForm">
+        <input type="tel" require ng-pattern="/^\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})$/" class="email-form" name="phone" placeholder="Enter a phone number" ng-model="phone" ng-required="true">
         </div>
+        <p class="help-block" ng-show="phoneFieldForm.phone.$invalid && phoneFieldForm.phone.$dirty">Enter your phone number without any characters (i.e. 1234567890)</p>
+        </ng-form>
     </form>
 
     <h3

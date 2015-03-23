@@ -1,7 +1,7 @@
 <div class="text-center">
   <form class="container">
     <div class="col-sm-12">
-    <h1>Going from {{ custObj.home }} to {{ custObj.destination }}? Awesome. What's the most you'll pay?</h1>
+    <h1>Flying to {{ custObj.fullDestCity }} from {{ custObj.fullHomeCity }}? Awesome. What's your budget?</h1>
     <div ui-view></div>
     <form name="airportName">
     <input type="number" min="30" max="1200" ng-model="budget" placeholder="Your budget" class="form-control text-center" ng-required="true">
@@ -19,35 +19,35 @@
   <h3>We all make choices we regret. It's not too late to start over with one of these:</h3>
 
   <div class="container" ng-controller="RecsCtrl">
-      <div ng-repeat="item in randomData | limitTo:9">
-          <span ng-switch="" on="$index % 3">
-              <div class="row" ng-switch-when="0">
-                  <div class="col-md-4 portfolio-item" ng-show="randomData[$index+0]">
-                      <a href="#/location" ng-click="custObj.sendData('destination', randomData[$index+0].code)">
-                          <img class="img-responsive" src="{{ randomData[$index+0].image }}" alt="">
-                      </a>
-                      <h3>
-                          <p>{{ randomData[$index+0].city }}</p>
-                      </h3>
-                  </div>
-                  <div class="col-md-4 portfolio-item" ng-show="randomData[$index+1]">
-                      <a href="#/location" ng-click="custObj.sendData('destination', randomData[$index+1].code)">
-                          <img class="img-responsive" src="{{ randomData[$index+1].image }}" alt="">
-                      </a>
-                      <h3>
-                          <p>{{ randomData[$index+1].city }}</p>
-                      </h3>
-                  </div>
-                  <div class="col-md-4 portfolio-item" ng-show="randomData[$index+2]">
-                      <a href="#/location" ng-click="custObj.sendData('destination', randomData[$index+2].code)">
-                          <img class="img-responsive" src="{{ randomData[$index+2].image }}" alt="">
-                      </a>
-                      <h3>
-                          <p>{{ randomData[$index+2].city }}</p>
-                      </h3>
-                  </div>
-              </div>
-          </span>
-      </div>
-  </div>
+        <div ng-repeat="item in randomData | limitTo:9">
+            <span ng-switch="" on="$index % 3">
+                <div class="row" ng-switch-when="0">
+                    <div class="col-md-4 portfolio-item" ng-show="randomData[$index+0]">
+                        <a href="#/location" ng-click="custObj.sendData('destination', randomData[$index+0].code); custObj.sendData('fullDestCity', randomData[$index+0].city)">
+                            <img class="img-responsive" src="{{ randomData[$index+0].image }}" alt="">
+                        </a>
+                        <h3>
+                            <p>{{ randomData[$index+0].city }}</p>
+                        </h3>
+                    </div>
+                    <div class="col-md-4 portfolio-item" ng-show="randomData[$index+1]">
+                        <a href="#/location" ng-click="custObj.sendData('destination', randomData[$index+1].code); custObj.sendData('fullDestCity', randomData[$index+1].city)">
+                            <img class="img-responsive" src="{{ randomData[$index+1].image }}" alt="">
+                        </a>
+                        <h3>
+                            <p>{{ randomData[$index+1].city }}</p>
+                        </h3>
+                    </div>
+                    <div class="col-md-4 portfolio-item" ng-show="randomData[$index+2]">
+                        <a href="#/location" ng-click="custObj.sendData('destination', randomData[$index+2].code); custObj.sendData('fullDestCity', randomData[$index+2].city)">
+                            <img class="img-responsive" src="{{ randomData[$index+2].image }}" alt="">
+                        </a>
+                        <h3>
+                            <p>{{ randomData[$index+2].city }}</p>
+                        </h3>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
 </div>

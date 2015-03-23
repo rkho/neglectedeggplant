@@ -9130,7 +9130,7 @@
   {
     "code": "IST",
     "name": "Ataturk Hava Limani Airport",
-    "city": "Bak\u0131rk\u00f6y",
+    "city": "Istanbul",
     "country": "Turkey",
     "type": "Airports"
   },
@@ -14933,7 +14933,7 @@
   {
     "code": "NRT",
     "name": "Tokyo Narita International Airport",
-    "city": "Narita-shi",
+    "city": "Tokyo",
     "country": "Japan",
     "type": "Airports"
   },
@@ -24901,7 +24901,7 @@
   {
     "code": "YYZ",
     "name": "Toronto Lester B Pearson International Airport",
-    "city": "Mississauga",
+    "city": "Toronto",
     "country": "Canada",
     "type": "Airports"
   },
