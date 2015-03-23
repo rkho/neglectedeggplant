@@ -6,7 +6,9 @@
 
     <!-- Typeahead is for the live search results dropdown. Here's how the code basically reads: Show me a string concatenation of the name & airport code for every search result in the Main Controller's 'data' property, which is a JSON object.
 
-    Within that JSON object, only show results that match the value typed into this form by filtering it, and limit the results to a maximum of eight to prevent an extremely long list from forming -->
+    Within that JSON object, only show results that match the value typed into this form by filtering it, and limit the results to a maximum of eight to prevent an extremely long list from forming
+
+    Additionally, the 'next' button is only enabled if a selection is made from this Typeahead form. It cannot be edited (otherwise, the button disables itself immediately)-->
     <form name="destinationForm">
     <input type="text" ng-model="selected" placeholder="Type in a city name" typeahead="data.name + ': ' + data.city + ', ' + data.country + ' — ' + data.code for data in data | filter:$viewValue | limitTo:8" typeahead-editable="false" class="form-control text-center" ng-required="true">
     <p class="help-block" ng-show="destinationForm.text.$error.required">Please select from the dropdown menu</p>
