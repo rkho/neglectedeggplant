@@ -32,6 +32,14 @@ angular.module('wayfareApp')
       $http.post('usertodatabase', myFactory)
     }
   })
+  .controller('RecsCtrl', function($scope, $http, myFactory){
+    $scope.randomData = _.shuffle($scope.randomData) || '';
+    $http.get('getSuggestedData')
+      .then(function(res){
+        $scope.randomData = _.shuffle(res.data);
+      })
+    $scope.custObj = myFactory;
+  })
   .factory('myFactory', function(){
     var service = {};
     // This will take in a key/value pair. Key is either 'destination', 'location', or 'budget' based on which view we're collecting information.
