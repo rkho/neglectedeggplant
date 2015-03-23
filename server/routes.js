@@ -147,7 +147,13 @@ module.exports = function(app) {
   // This will get the airport JSON data and return it to the user during a search.
   app.route('/getAirportData')
     .get(function(req, res){
-      res.sendfile(app.get('appPath') + '/app/airportdata/airports.json');
+      res.sendfile(app.get('appPath') + '/app/json/airports.json');
+    })
+
+  // This will get the options JSON file and return it to the user, which displays the randomized suggestions underneath the search bar.
+  app.route('/getSuggestedData')
+    .get(function(req, res){
+      res.sendfile(app.get('appPath') + '/app/json/options.json');
     })
 
   // All other routes should redirect to the index.html
