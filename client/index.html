@@ -33,86 +33,6 @@
     <div ng-view ng-controller="MainCtrl"></div>
     </div>
 
-    <div class="container" ng-controller="MainCtrl">
-        <div class="row">
-            <div class="col-md-4 portfolio-item">
-                <a href="#/location" ng-click="custObj.sendData('destination', 'JFK')">
-                    <img class="img-responsive" src="assets/images/nyc.jpg" alt="">
-                </a>
-                <h3>
-                    <p>New York City</p>
-                </h3>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="#/location" ng-click="custObj.sendData('destination', 'HNL')">
-                    <img class="img-responsive" src="assets/images/hawaii.jpg" alt="">
-                </a>
-                <h3>
-                  <p>Honolulu</p>
-                </h3>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="#/location" ng-click="custObj.sendData('destination', 'CDG')">
-                    <img class="img-responsive" src="assets/images/paris.jpg" alt="">
-                </a>
-                <h3>
-                    <p>Paris</p>
-                </h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 portfolio-item">
-                <a href="#/location" ng-click="custObj.sendData('destination', 'BCN')">
-                    <img class="img-responsive" src="assets/images/barcelona.jpg" alt="">
-                </a>
-                <h3>
-                    <p>Barcelona</p>
-                </h3>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="#/location" ng-click="custObj.sendData('destination', 'HKG')">
-                    <img class="img-responsive" src="assets/images/hongkong.jpg" alt="">
-                </a>
-                <h3>
-                    <p>Hong Kong</p>
-                </h3>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="#/location" ng-click="custObj.sendData('destination', 'YYZ')">
-                    <img class="img-responsive" src="assets/images/toronto.jpg" alt="">
-                </a>
-                <h3>
-                    <p>Toronto</p>
-                </h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 portfolio-item">
-                <a href="#/location" ng-click="custObj.sendData('destination', 'NRT')">
-                    <img class="img-responsive" src="assets/images/tokyo.jpg" alt="">
-                </a>
-                <h3>
-                    <p>Tokyo</p>
-                </h3>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="#/location" ng-click="custObj.sendData('destination', 'LHR')">
-                    <img class="img-responsive" src="assets/images/london.jpg" alt="">
-                </a>
-                <h3>
-                    <p>London</p>
-                </h3>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="#/location" ng-click="custObj.sendData('destination', 'PRG')">
-                    <img class="img-responsive" src="assets/images/prague.jpg" alt="">
-                </a>
-                <h3>
-                    <p>Prague</p>
-                </h3>
-            </div>
-        </div>
-    </div>
 
     <div class="footer">
       <div class="container">
@@ -123,6 +43,7 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>

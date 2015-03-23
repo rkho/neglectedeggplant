@@ -18,4 +18,39 @@
   </form>
     <hr>
     <h3>Can't decide? We understand. Here are some popular choices:</h3>
+
+
+    <!-- This code repeats the randomData array, limited to the first nine, and for every three items we create a row with a different element in it. -->
+    <div class="container" ng-controller="RecsCtrl">
+        <div ng-repeat="item in randomData | limitTo:9">
+            <span ng-switch="" on="$index % 3">
+                <div class="row" ng-switch-when="0">
+                    <div class="col-md-4 portfolio-item" ng-show="randomData[$index+0]">
+                        <a href="#/location" ng-click="custObj.sendData('destination', randomData[$index+0].code)">
+                            <img class="img-responsive" src="{{ randomData[$index+0].image }}" alt="">
+                        </a>
+                        <h3>
+                            <p>{{ randomData[$index+0].city }}</p>
+                        </h3>
+                    </div>
+                    <div class="col-md-4 portfolio-item" ng-show="randomData[$index+1]">
+                        <a href="#/location" ng-click="custObj.sendData('destination', randomData[$index+1].code)">
+                            <img class="img-responsive" src="{{ randomData[$index+1].image }}" alt="">
+                        </a>
+                        <h3>
+                            <p>{{ randomData[$index+1].city }}</p>
+                        </h3>
+                    </div>
+                    <div class="col-md-4 portfolio-item" ng-show="randomData[$index+2]">
+                        <a href="#/location" ng-click="custObj.sendData('destination', randomData[$index+2].code)">
+                            <img class="img-responsive" src="{{ randomData[$index+2].image }}" alt="">
+                        </a>
+                        <h3>
+                            <p>{{ randomData[$index+2].city }}</p>
+                        </h3>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
 </div>
