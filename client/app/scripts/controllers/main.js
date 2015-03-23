@@ -51,7 +51,6 @@ angular.module('wayfareApp')
       if (key === 'budget' || key === 'email') {
         this[key] = value;
       }
-      console.log(this);
     }
     return service;
   })
