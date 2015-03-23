@@ -5,7 +5,7 @@
     <div ui-view></div>
     <form name="airportName">
     <!-- Again, same code like we saw in main.html -->
-    <input type="text" ng-model="home" placeholder="Type in a city name" typeahead="data.city + ', ' +  data.name + ' - ' + data.code for data in data | filter:$viewValue | limitTo:8" class="form-control text-center" ng-required="true">
+    <input type="text" ng-model="home" placeholder="Type in a city name" typeahead="data.name + ': ' + data.city + ', ' + data.country + ' — ' + data.code for data in data | filter:$viewValue | limitTo:8" typeahead-editable="false" class="form-control text-center" ng-required="true">
 
 
     <a href="#/budget" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!home" ng-click="custObj.sendData('home', home)">NEXT</a>

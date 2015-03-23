@@ -7,9 +7,10 @@
     <!-- Typeahead is for the live search results dropdown. Here's how the code basically reads: Show me a string concatenation of the name & airport code for every search result in the Main Controller's 'data' property, which is a JSON object.
 
     Within that JSON object, only show results that match the value typed into this form by filtering it, and limit the results to a maximum of eight to prevent an extremely long list from forming -->
-
-    <input type="text" ng-model="selected" placeholder="Type in a city name" typeahead="data.city + ', ' +  data.name + ' - ' + data.code for data in data | filter:$viewValue | limitTo:8" class="form-control text-center" ng-required="true">
-
+    <form name="destinationForm">
+    <input type="text" ng-model="selected" placeholder="Type in a city name" typeahead="data.name + ': ' + data.city + ', ' + data.country + ' — ' + data.code for data in data | filter:$viewValue | limitTo:8" typeahead-editable="false" class="form-control text-center" ng-required="true">
+    <p class="help-block" ng-show="destinationForm.text.$error.required">Please select from the dropdown menu</p>
+    </form>
     <!-- When the 'NEXT' button is clicked, we invoke sendData from the factory object, setting a 'destination' property to it and passing along the value in the model above.
 
     This button is also disabled unless a value is entered into the model above, preventing empty submission -->
@@ -54,3 +55,5 @@
         </div>
     </div>
 </div>
+
+
