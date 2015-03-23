@@ -1,7 +1,7 @@
 var triggerSMS = require('./components/sms/trigger-sms.js');
 
 triggerSMS(
-  "+15555555555",
+  "+15555555555", // Twilio accepts formats 555-555-5555 and 5555555555
   {
     origin: "Los Angeles",
     destination: "San Diego",
