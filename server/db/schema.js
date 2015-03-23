@@ -10,6 +10,7 @@ var sequelize = new Sequelize(process.env['CLEAR_DB_DATABASE'], process.env['CLE
 
 var User = sequelize.define('User', {
   email: { type: Sequelize.STRING(255), allowNull: false },
+  phone: { type: Sequelize.STRING(255), allowNull: true },
   origin: { type: Sequelize.STRING(3), allowNull: false },
   destination: { type: Sequelize.STRING(3), allowNull: false },
   budget: { type: Sequelize.FLOAT, allowNull: false },

@@ -4,6 +4,7 @@ public
 .idea
 dist
 server/config/local.env.js
+server/npm-debug.log
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:

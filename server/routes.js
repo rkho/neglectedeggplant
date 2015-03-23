@@ -7,6 +7,7 @@ var User = require('./db/schema.js');
 var errors = require('./components/errors');
 var request = require('request') // The express method for requesting data from an API
 var triggerEmail = require('./components/emails/trigger-email.js');
+var triggerSMS = require('./components/sms/trigger-sms.js');
 var daysFromNow = require('./components/days-from-now.js');
 
 // var data = require('/client/app/airportdata/airports.json');
@@ -45,16 +46,16 @@ module.exports = function(app) {
         };
 
         request.post(options, function(err, res, body) {
-    
+
           if(err){ console.log(err); console.log(err.error.errors) }
-          
+
           //For debugging production
           console.log("Checking: ", user.get('email'), user.get('origin'), user.get('destination'), " -> ", user.get('budget'))
           console.log(res.body);
           console.log(res.body.trips);
 
           if (res.body.trips !== undefined && res.body.trips.tripOption !== undefined){ //Flight found
-            
+
             var flight = res.body.trips.tripOption[0];
             var departure = flight.slice[0].segment[0].leg[0].departureTime.split("T");
             var formattedDeparture = departure[0] + " at " + departure[1].split("-")[0];
@@ -80,15 +81,37 @@ module.exports = function(app) {
                 }
               }
             );
-                      
+
+            if ( user.phone ) {
+              triggerSMS(
+                user.get('phone'),
+                {
+                  origin: user.get('origin'),
+                  destination: user.get('destination'),
+                  price: parseFloat(flight.saleTotal.replace("USD","")).toFixed(2),
+                  carrier: flight.slice[0].segment[0].flight.carrier,
+                  departure: formattedDeparture,
+                  proceedUrl: 'https://www.google.com/flights/#search;f='+user.get('origin')+';t='+user.get('destination')+';d='+searchDate+';tt=o'
+                },
+                {
+                  success: function(){
+                    console.log("Send sms!", user.get('phone'), parseFloat(flight.saleTotal.replace("USD","")).toFixed(2));
+                  },
+                  error: function(err){
+                    console.log(err);
+                  }
+                }
+              );
+            }
+
           }else{
             console.log("no flights found");
           }
 
         });
-      
+
       });
-      
+
     });
 
   });
@@ -98,6 +121,7 @@ module.exports = function(app) {
 
     User.create({
       email: req.body.email,
+      phone: req.body.phone,
       origin: req.body.home,
       destination: req.body.destination,
       budget: req.body.budget,
@@ -112,6 +136,7 @@ module.exports = function(app) {
   // If we hit this URL, the server logs it's IP.
   app.get('/remotedetails', function(req, res) {
     res.send(200);
+
     request.get({ uri: "http://ip-api.com/json"}, function(err, res, body) {
       console.log(res.body);
     });

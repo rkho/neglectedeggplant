@@ -11,7 +11,7 @@ Parameters:
       carrier: {String} - E.g. Virgin America.
       departure: {String} - E.g. Saturday, 5th June at 10:30AM.
       proceedUrl: {String} - Where the CTA button sends the user.
-  - Callbacks {Object}: An object containing 'success' and 'error' properties pointing to functions. 
+  - Callbacks {Object}: An object containing 'success' and 'error' properties pointing to functions.
 
 Example usage:
 
@@ -44,9 +44,9 @@ var triggerEmail = function(recipient, emailData, callbacks){
 
   //Open template.html
   fs.readFile(__dirname + "/template.html", function(err, data){
-  
+
     if (err) callbacks.error("Couldn't read template.html");
-    
+
     var template = data.toString();
 
     //Replace template variables with our data
@@ -62,7 +62,7 @@ var triggerEmail = function(recipient, emailData, callbacks){
       subject:  'We found a flight!',
       html:     template
     }, function(err, json) {
-      
+
       if (err){
 
         //Trigger error callback
@@ -75,13 +75,13 @@ var triggerEmail = function(recipient, emailData, callbacks){
 
           //Trigger success callback
           callbacks.success();
-        
+
         };
 
       };
 
     });
-      
+
   });
 
 };
