@@ -65,6 +65,8 @@ var triggerSMS = function(recipientPhone, smsData, callbacks){
 
             //Trigger success callback
             callbacks.success();
+        } else {
+          callbacks.error(err);
         }
     });
 };
