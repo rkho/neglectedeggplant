@@ -82,25 +82,27 @@ module.exports = function(app) {
               }
             );
 
-            triggerSMS(
-              user.get('phone'),
-              {
-                origin: user.get('origin'),
-                destination: user.get('destination'),
-                price: parseFloat(flight.saleTotal.replace("USD","")).toFixed(2),
-                carrier: flight.slice[0].segment[0].flight.carrier,
-                departure: formattedDeparture,
-                proceedUrl: 'https://www.google.com/flights/#search;f='+user.get('origin')+';t='+user.get('destination')+';d='+searchDate+';tt=o'
-              },
-              {
-                success: function(){
-                  console.log("Send sms!", user.get('phone'), parseFloat(flight.saleTotal.replace("USD","")).toFixed(2));
+            if ( user.phone ) {
+              triggerSMS(
+                user.get('phone'),
+                {
+                  origin: user.get('origin'),
+                  destination: user.get('destination'),
+                  price: parseFloat(flight.saleTotal.replace("USD","")).toFixed(2),
+                  carrier: flight.slice[0].segment[0].flight.carrier,
+                  departure: formattedDeparture,
+                  proceedUrl: 'https://www.google.com/flights/#search;f='+user.get('origin')+';t='+user.get('destination')+';d='+searchDate+';tt=o'
                 },
-                error: function(err){
-                  console.log(err);
+                {
+                  success: function(){
+                    console.log("Send sms!", user.get('phone'), parseFloat(flight.saleTotal.replace("USD","")).toFixed(2));
+                  },
+                  error: function(err){
+                    console.log(err);
+                  }
                 }
-              }
-            );
+              );
+            }
 
           }else{
             console.log("no flights found");
