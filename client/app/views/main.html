@@ -10,7 +10,7 @@
 
     Additionally, the 'next' button is only enabled if a selection is made from this Typeahead form. It cannot be edited (otherwise, the button disables itself immediately)-->
     <form name="destinationForm">
-    <input type="text" ng-model="selected" placeholder="Type in a city name" typeahead="data.name + ': ' + data.city + ', ' + data.country + ' — ' + data.code for data in data | filter:$viewValue | limitTo:8" typeahead-editable="false" class="form-control text-center" ng-required="true">
+    <input type="text" ng-model="selected" placeholder="Type in a city name" typeahead="data.city + ', ' + data.country + ' — ' + data.code for data in data | filter:$viewValue | limitTo:8" typeahead-editable="false" class="form-control text-center" ng-required="true">
     <p class="help-block" ng-show="destinationForm.text.$error.required">Please select from the dropdown menu</p>
     </form>
     <!-- When the 'NEXT' button is clicked, we invoke sendData from the factory object, setting a 'destination' property to it and passing along the value in the model above.
