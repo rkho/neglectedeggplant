@@ -1,22 +1,21 @@
-var client = require('twilio')('ACCOUNT_SID', 'AUTH_TOKEN');
+var triggerSMS = require('./components/sms/trigger-sms.js');
 
-//Send an SMS text message
-client.sendMessage({
-
-    to:'+16515556677', // Any number Twilio can deliver to
-    from: '+14506667788', // A number you bought from Twilio and can use for outbound communication
-    body: 'word to your mother.' // body of the SMS message
-
-}, function(err, responseData) { //this function is executed when a response is received from Twilio
-
-    if (!err) { // "err" is an error received during the request, if any
-
-        // "responseData" is a JavaScript object containing data received from Twilio.
-        // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
-        // http://www.twilio.com/docs/api/rest/sending-sms#example-1
-
-        console.log(responseData.from); // outputs "+14506667788"
-        console.log(responseData.body); // outputs "word to your mother."
-
+triggerSMS(
+  "15555555555",
+  {
+    origin: "Los Angeles",
+    destination: "San Diego",
+    price: 123.45,
+    carrier: "Virgin America",
+    departure: "01/23/16 at 3PM",
+    proceedUrl: "http://virginamerica.com"
+  },
+  {
+    success: function(){
+      console.log("Success!");
+    },
+    error: function(err){
+      console.log("An error occured:", err);
     }
-});
+  }
+);

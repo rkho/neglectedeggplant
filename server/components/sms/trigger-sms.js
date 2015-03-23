@@ -46,7 +46,7 @@ var triggerSMS = function(recipientPhone, smsData, callbacks){
                   + ' visit ' + smsData.proceedUrl;
 
     //Send an SMS text message
-    client.sendMessage({
+    twilio.sendMessage({
 
         to:     recipientPhone, // Any number Twilio can deliver to
         from:   process.env['TWILIO_PHONE_NUMBER'], // A number you bought from Twilio and can use for outbound communication
