@@ -8,7 +8,7 @@
         </li>
     </ul>
     <h4>You'd like to book a flight from <b> {{ custObj.home }}</b> to <b>{{ custObj.destination }}.</b></h4>
-    <h4>You've named your own price of <b>${{ custObj.budget }}.</b></h4>
+    <h4>You've named your own price of <b>{{ custObj.budget | currency }}.</b></h4>
     <br />
     <h4>If we can find a deal, where can we reach you?</h4>
 
