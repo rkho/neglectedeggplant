@@ -1,7 +1,7 @@
 var triggerSMS = require('./components/sms/trigger-sms.js');
 
 triggerSMS(
-  "15555555555",
+  "+15555555555",
   {
     origin: "Los Angeles",
     destination: "San Diego",
