@@ -17,17 +17,17 @@
       <ng-form name="emailFieldForm">
         <input type="email" class="email-form" name="email" placeholder="Enter an email address" ng-model="email" ng-required="true">
         <p class="help-block" ng-show="emailFieldForm.email.$invalid">Valid Email Required</p>
+        </ng-form>
         <br />
         <h4>Would you like to receive a text?</h4>
         <input type="tel" class="email-form" name="phone" placeholder="Enter a phone number" ng-model="phone" ng-required="true">
-        </ng-form>
         </div>
     </form>
 
     <h3
 </div>
 <div class="modal-footer">
-    <a href="#/finished" class="btn btntwo btn-primary" ng-disabled="!email" ng-click="custObj.sendData('email', email); success(); ok()">OK</a>
+    <a href="#/finished" class="btn btntwo btn-primary" ng-disabled="!email" ng-click="custObj.sendData('email', email); custObj.sendData('phone', phone); success(); ok()">OK</a>
 </div>
 
 <div class="progress">
