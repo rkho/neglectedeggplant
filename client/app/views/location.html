@@ -8,7 +8,7 @@
     <input type="text" ng-model="home" placeholder="Type in a city name" typeahead="data.name + ': ' + data.city + ', ' + data.country + ' — ' + data.code for data in data | filter:$viewValue | limitTo:8" typeahead-editable="false" class="form-control text-center" ng-required="true">
 
 
-    <a href="#/budget" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!home" ng-click="custObj.sendData('home', home)">NEXT</a>
+    <a href="#/budget" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!home" ng-click="custObj.sendData('home', home.substr(-3))">NEXT</a>
     </form>
     </div>
   </form>

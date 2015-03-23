@@ -42,15 +42,17 @@ angular.module('wayfareApp')
   })
   .factory('myFactory', function(){
     var service = {};
-    // This will take in a key/value pair. Key is either 'destination', 'location', or 'budget' based on which view we're collecting information.
+    // Iterate across the keys of LocalStorage and set service[key] to equal that specific value. This is so we can persist data through refreshes.
+    _.each(Object.keys(localStorage), function(elem){
+      service[elem] = localStorage[elem];
+      console.log(service[elem]);
+    })
+
+    // This will take in a key/value pair. The following keys are collected: 'destination', 'home', 'budget', 'email', and (soon) 'phone'.
     service.sendData = function(key, value){
-      // We only want the airport code, which happens to be the last three characters of the string if we're setting a Destination or Home property.
-      if (key === 'destination' || key === 'home'){
-        this[key] = value.substr(-3); // change to pull data.code instead of substring
-      }
-      if (key === 'budget' || key === 'email') {
-        this[key] = value;
-      }
+      localStorage.removeItem(key);
+      localStorage[key] = value;
+      this[key] = value;
     }
     return service;
   })

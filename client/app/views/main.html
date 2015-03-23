@@ -16,7 +16,7 @@
     <!-- When the 'NEXT' button is clicked, we invoke sendData from the factory object, setting a 'destination' property to it and passing along the value in the model above.
 
     This button is also disabled unless a value is entered into the model above, preventing empty submission -->
-    <a href="#/location" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!selected" ng-click="custObj.sendData('destination', selected)">NEXT</a>
+    <a href="#/location" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!selected" ng-click="custObj.sendData('destination', selected.substr(-3))">NEXT</a>
     </div>
   </form>
 

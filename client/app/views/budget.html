@@ -4,7 +4,7 @@
     <h1>Going from {{ custObj.home }} to {{ custObj.destination }}? Awesome. What's the most you'll pay?</h1>
     <div ui-view></div>
     <form name="airportName">
-    <input type="number" ng-model="budget" placeholder="Your budget" class="form-control text-center" ng-required="true">
+    <input type="number" min="30" ng-model="budget" placeholder="Your budget" class="form-control text-center" ng-required="true">
 
     <a href="#/budget" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!budget" ng-click="custObj.sendData('budget', budget); open()">NEXT</a>
     </form>
