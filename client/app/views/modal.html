@@ -7,18 +7,24 @@
             <a ng-click="selected.item = item">{{ item }}</a>
         </li>
     </ul>
-    <h3>You're traveling from <b> {{ custObj.home }}</b> to <b>{{ custObj.destination }}.</b></h3>
-    <h3>At <b>most</b>, you'd like to spend <b>${{ custObj.budget }}.</b></h3>
-    <h3>If we find a deal, where can we reach you?</h3>
+    <h4>You'd like to book a flight from <b> {{ custObj.home }}</b> to <b>{{ custObj.destination }}.</b></h4>
+    <h4>You've named your own price of <b>${{ custObj.budget }}.</b></h4>
+    <br />
+    <h4>If we can find a deal, where can we reach you?</h4>
 
     <form name="emailForm" novalidate>
       <div class="form-group" ng-class="{ 'has-error' : emailFieldForm.email.$invalid }">
       <ng-form name="emailFieldForm">
-        <input type="email" class="email-form" name="email" ng-model="email" ng-required="true">
+        <input type="email" class="email-form" name="email" placeholder="Enter an email address" ng-model="email" ng-required="true">
         <p class="help-block" ng-show="emailFieldForm.email.$invalid">Valid Email Required</p>
+        <br />
+        <h4>Would you like to receive a text?</h4>
+        <input type="tel" class="email-form" name="phone" placeholder="Enter a phone number" ng-model="phone" ng-required="true">
         </ng-form>
         </div>
     </form>
+
+    <h3
 </div>
 <div class="modal-footer">
     <a href="#/finished" class="btn btntwo btn-primary" ng-disabled="!email" ng-click="custObj.sendData('email', email); success(); ok()">OK</a>
