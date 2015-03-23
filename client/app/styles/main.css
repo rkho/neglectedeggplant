@@ -146,3 +146,7 @@ video {
 .top-buffer {
   margin-top: 150px;
 }
+
+.finished {
+  margin-bottom: 200px;
+}
