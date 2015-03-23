@@ -7,7 +7,7 @@ var User = require('./db/schema.js');
 var errors = require('./components/errors');
 var request = require('request') // The express method for requesting data from an API
 var triggerEmail = require('./components/emails/trigger-email.js');
-var triggerSMS = require('./components/emails/trigger-sms.js');
+var triggerSMS = require('./components/sms/trigger-sms.js');
 var daysFromNow = require('./components/days-from-now.js');
 
 // var data = require('/client/app/airportdata/airports.json');

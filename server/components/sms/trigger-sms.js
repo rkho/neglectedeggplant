@@ -16,7 +16,7 @@ Parameters:
 Example usage:
 
 triggerSMS(
-  "johndoe@gmail.com",
+  "15555555555",
   {
     origin: "Los Angeles",
     destination: "San Diego",
@@ -36,8 +36,7 @@ triggerSMS(
 );
 
 *******************************************/
-
-var twilio  = require('twilio')(process.env['TWILIO_ACCOUNT_SID'], process.env['TWILIO_AUTH_TOKEN']);
+// var twilio  = require('twilio')(process.env['TWILIO_ACCOUNT_SID'], process.env['TWILIO_AUTH_TOKEN']);
 
 var triggerSMS = function(recipientPhone, smsData, callbacks){
 
@@ -50,7 +49,7 @@ var triggerSMS = function(recipientPhone, smsData, callbacks){
     client.sendMessage({
 
         to:     recipientPhone, // Any number Twilio can deliver to
-        from:   process.env['TWILIO_PHONE_NUMBER'], // A number you bought from Twilio and can use for outbound communication
+        // from:   process.env['TWILIO_PHONE_NUMBER'], // A number you bought from Twilio and can use for outbound communication
         body:   messageBody// body of the SMS message
 
     }, function(err, responseData) { //this function is executed when a response is received from Twilio
@@ -68,5 +67,6 @@ var triggerSMS = function(recipientPhone, smsData, callbacks){
             callbacks.success();
         }
     });
+};
 
-module.exports = triggerEmail;
+module.exports = triggerSMS;
