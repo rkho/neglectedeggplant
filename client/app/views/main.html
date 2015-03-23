@@ -8,12 +8,18 @@
 
     Within that JSON object, only show results that match the value typed into this form by filtering it, and limit the results to a maximum of eight to prevent an extremely long list from forming
 
-    Additionally, the 'next' button is only enabled if a selection is made from this Typeahead form. It cannot be edited (otherwise, the button disables itself immediately)-->
+    Additionally, the 'next' button is only enabled if a selection is made from this Typeahead form. It cannot be edited (otherwise, the button disables itself immediately)
+    -->
     <input type="text" ng-model="selected" placeholder="Type in a city name" typeahead="data.city + ', ' + data.country + ' — ' + data.code for data in data | filter:$viewValue | limitTo:8" typeahead-editable="false" class="form-control text-center" ng-required="true">
     </form>
     <!-- When the 'NEXT' button is clicked, we invoke sendData from the factory object, setting a 'destination' property to it and passing along the value in the model above.
 
-    This button is also disabled unless a value is entered into the model above, preventing empty submission -->
+    This button is also disabled unless a value is entered into the model above, preventing empty submission
+
+    I'm calling sendData twice. Once on the airport code that gets sent to the server ('destination') and one on the city name ('fullDestCity').
+
+    I formatted the string in the ng-model above to be City, Country - Code so splitting it by comma will give me an array with the city in the 0th index.
+    -->
     <a href="#/location" class="smooth-scroll btn btn-danger btn-next" ng-disabled="!selected" ng-click="custObj.sendData('destination', selected.substr(-3)); custObj.sendData('fullDestCity', selected.split(',')[0])">NEXT</a>
     </div>
   </form>

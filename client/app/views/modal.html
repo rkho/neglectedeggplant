@@ -7,6 +7,7 @@
             <a ng-click="selected.item = item">{{ item }}</a>
         </li>
     </ul>
+    <!-- Budget has a currency filter to round up if there are more than two decimal points and also display the dollar sign automatically -->
     <h4>You'd like to book a flight from <b> {{ custObj.fullHomeCity }}</b> to <b>{{ custObj.fullDestCity }}</b></h4>
     <h4>You have a budget of <b>{{ custObj.budget | currency }}</b></h4>
     <br />
@@ -19,7 +20,7 @@
         <p class="help-block" ng-show="emailFieldForm.email.$invalid && emailFieldForm.email.$dirty">Valid Email Required</p>
         </ng-form>
         <br />
-
+        <!-- Regexp on line 26 checks for a valid ten-digit number. -->
         <h4>Would you like to receive a text? (Optional)</h4>
         <div class="form-group" ng-class="{ 'has-error' : phoneFieldForm.phone.$invalid }">
         <ng-form name="phoneFieldForm">
