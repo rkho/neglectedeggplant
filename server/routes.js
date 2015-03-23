@@ -119,7 +119,7 @@ module.exports = function(app) {
 
     User.create({
       email: req.body.email,
-      // phone: req.body.phone,
+      phone: req.body.phone,
       origin: req.body.home,
       destination: req.body.destination,
       budget: req.body.budget,
